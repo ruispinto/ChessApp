@@ -12,6 +12,8 @@ namespace ChessApp
         static Board myBoard = new Board(8);
         static public string chessPiece = "";
 
+        // static public int option = 1;
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the chess tutorial");
@@ -21,60 +23,65 @@ namespace ChessApp
             // show the empty chess board
             printBoard(myBoard, "");
 
-            // ask user for the coordinates where the piece will be placed
-            Cell currentCell = setCUrrentCell();
-            currentCell.CurrentlyOccupied = true;
-            
-            Console.WriteLine();
+            int option = 1;
 
-            Console.WriteLine("Choose from one of the pieces to play:");
-            Console.WriteLine("    1 - Knight");
-            Console.WriteLine("    2 - King");
-            Console.WriteLine("    3 - Rook");
-            Console.WriteLine("    4 - Bishop");
-            Console.WriteLine("    5 - Queen");
-            Console.WriteLine("    6 - Pawn");
-            Console.WriteLine("    0 - Exit the game");
-
-            // test the option entered
-            int option = 0;
-
-            Console.Write("Number: ");
-
-            try
-            {
-                option = int.Parse(Console.ReadLine());
-            }
-            catch
-            {
-                Console.WriteLine("Only one of these numbers are allowed");
-            }
-            if (option > 0)
-                if (option < 7)
+            while (option > 0)
                 {
+
+                    // ask user for the coordinates where the piece will be placed
+                    Cell currentCell = setCUrrentCell();
+                    currentCell.CurrentlyOccupied = true;
+
                     Console.WriteLine();
+                    Console.WriteLine("Choose from one of the pieces to play:");
+                    Console.WriteLine("    1 - Knight");
+                    Console.WriteLine("    2 - King");
+                    Console.WriteLine("    3 - Rook");
+                    Console.WriteLine("    4 - Bishop");
+                    Console.WriteLine("    5 - Queen");
+                    Console.WriteLine("    6 - Pawn");
+                    Console.WriteLine("    0 - Exit the game");
 
-                    if (option == 1)
-                        chessPiece = "Knight";
-                    else if (option == 2)
-                        chessPiece = "King";
-                    else if (option == 3)
-                        chessPiece = "Rook";
-                    else if (option == 4)
-                        chessPiece = "Bishop";
-                    else if (option == 5)
-                        chessPiece = "Queen";
-                    else if (option == 6)
-                        chessPiece = "Pawn";
+                    // test the option entered
+                    Console.Write("Number: ");
 
-                    // calculate all legal moves for that piece
-                    myBoard.MarkNextLegalMoves(currentCell, option);
+                    try
+                    {
+                        option = int.Parse(Console.ReadLine());
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Only one of these numbers are allowed");
+                    }
+                    if (option > 0)
+                        if (option < 7)
+                        {
+                            Console.WriteLine();
 
-                    // print the chess board. Use an X to occupie the square. Use a + for the legal move. Use . for empty cell
-                    printBoard(myBoard, chessPiece);
+                        if (option == 1)
+                            chessPiece = "Knight";
+                        else if (option == 2)
+                            chessPiece = "King";
+                        else if (option == 3)
+                            chessPiece = "Rook";
+                        else if (option == 4)
+                            chessPiece = "Bishop";
+                        else if (option == 5)
+                            chessPiece = "Queen";
+                        else if (option == 6)
+                            chessPiece = "Pawn";
 
-                }
+                            // calculate all legal moves for that piece
+                            myBoard.MarkNextLegalMoves(currentCell, option);
 
+                            // print the chess board. Use an X to occupie the square. Use a + for the legal move. Use . for empty cell
+                            printBoard(myBoard, chessPiece);
+
+                        }
+
+            }
+
+            Console.WriteLine("Press 'Enter' to exit the game...");
             Console.ReadLine();
         }
 
